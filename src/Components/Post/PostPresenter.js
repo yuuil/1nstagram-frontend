@@ -10,6 +10,7 @@ const Post = styled.div`
   width: 100%;
   max-width: 600px;
   margin-bottom: 25px;
+  user-select: none;
 `;
 
 const Header = styled.header`
@@ -96,8 +97,10 @@ const PostPresenter = ({
   likeCount,
   createdAt,
   newComment,
-  currentItem
+  currentItem,
+  toggleLike
 }) => {
+  if(!avatar) avatar = "https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png";
   return (
     <Post>
       <Header>
@@ -112,7 +115,7 @@ const PostPresenter = ({
       </Files>
       <Meta>
         <Buttons>
-          <Button>{isLiked ? <HeartFull /> : <HeartEmpty />}</Button>
+          <Button onClick={toggleLike}>{isLiked ? <HeartFull /> : <HeartEmpty />}</Button>
         </Buttons>
         <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
         <Timestamp>{createdAt}</Timestamp>
