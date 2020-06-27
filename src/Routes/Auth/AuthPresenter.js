@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Input from "../../Components/Input";
 import Button from "../../Components/Button";
+import { Helmet } from "react-helmet";
 
 const Wrapper = styled.div`
   min-height: 80vh;
@@ -60,25 +61,40 @@ const Auth = ({
     <Wrapper>
       <Form>
         {action === "logIn" && (
-          <form onSubmit={onSubmit}>
-            <Input placeholder={"Email"} {...email} type="email" />
-            <Button text={"Log in"} />
-          </form>
+          <>
+            <Helmet>
+              <title>LogIn | 1nsta9ram</title>
+            </Helmet>
+            <form onSubmit={onSubmit}>
+              <Input placeholder={"Email"} {...email} type="email" />
+              <Button text={"Log in"} />
+            </form>
+          </>
         )}
         {action === "signUp" && (
-          <form onSubmit={onSubmit}>
-            <Input placeholder={"First name"} {...firstName} />
-            <Input placeholder={"Last name"} {...lastName} />
-            <Input placeholder={"Email"} {...email} type="email" />
-            <Input placeholder={"Username"} {...username} />
-            <Button text={"Sign up"} />
-          </form>
+          <>
+            <Helmet>
+              <title>Sign Up | 1nsta9ram</title>
+            </Helmet>
+            <form onSubmit={onSubmit}>
+              <Input placeholder={"First name"} {...firstName} />
+              <Input placeholder={"Last name"} {...lastName} />
+              <Input placeholder={"Email"} {...email} type="email" />
+              <Input placeholder={"Username"} {...username} />
+              <Button text={"Sign up"} />
+            </form>
+          </>
         )}
         {action === "confirm" && (
-          <form onSubmit={onSubmit}>
-            <Input placeholder="Paster your secret" required {...secret} />
-            <Button text={"Confirm"} />
-          </form>
+          <>
+            <Helmet>
+              <title>Confirm Secret | 1nsta9ram</title>
+            </Helmet>
+            <form onSubmit={onSubmit}>
+              <Input placeholder="Paster your secret" required {...secret} />
+              <Button text={"Confirm"} />
+            </form>
+          </>
         )}
       </Form>
       {action !== "confirm" && (
