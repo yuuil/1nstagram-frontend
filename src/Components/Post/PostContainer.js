@@ -34,7 +34,7 @@ const PostContainer = ({
   }, [files, currentItem]);
   useEffect(() => {
     slide();
-  }, [currentItem, slide]);
+  }, [isLiked, likeCount, currentItem, slide]);
 
   const toggleLike = () => {
     if (isLikedS === true) {

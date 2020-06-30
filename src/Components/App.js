@@ -11,8 +11,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { HashRouter as Router } from "react-router-dom";
 import Header from "./Header";
 
-
-
 const QUERY = gql`
   {
     isLoggedIn @client
@@ -35,7 +33,7 @@ const App = () => {
         <GlobalStyles />
         <Router>
           <>
-            <Header />
+            {isLoggedIn && <Header />}
             <Wrapper>
               <Routes isLoggedIn={isLoggedIn} />
               <Footer />
