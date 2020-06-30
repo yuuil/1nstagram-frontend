@@ -4,6 +4,7 @@ import Avatar from "../Avatar";
 import FatText from "../FatText";
 import { HeartFull, HeartEmpty, Comment as CommentIcon } from "../Icon";
 import TextareaAutosize from "react-autosize-textarea";
+import { Link } from "react-router-dom";
 
 const Post = styled.div`
   ${(props) => props.theme.whiteBox};
@@ -11,6 +12,9 @@ const Post = styled.div`
   max-width: 600px;
   margin-bottom: 25px;
   user-select: none;
+  a {
+    color: inherit;
+  }
 `;
 
 const Header = styled.header`
@@ -100,6 +104,10 @@ const Comment = styled.li`
   }
 `;
 
+const Caption = styled.div`
+  margin: 10px 0;
+`;
+
 const PostPresenter = ({
   user: { username, avatar },
   location,
@@ -112,14 +120,17 @@ const PostPresenter = ({
   toggleLike,
   onKeyPress,
   comments,
-  selfComments
+  selfComments,
+  caption,
 }) => {
   return (
     <Post>
       <Header>
         <Avatar size="sm" url={avatar} />
         <UserColumn>
-          <FatText text={username} />
+          <Link to={`/${username}`}>
+            <FatText text={username} />
+          </Link>
           <Location>{location}</Location>
         </UserColumn>
       </Header>
@@ -143,15 +154,18 @@ const PostPresenter = ({
           </Button>
         </Buttons>
         <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
+        <Caption>
+          <FatText text={username} /> {caption}
+        </Caption>
         {comments && (
           <Comments>
-            {comments.map(comment => (
+            {comments.map((comment) => (
               <Comment key={comment.id}>
                 <FatText text={comment.user.username} />
                 {comment.text}
               </Comment>
             ))}
-            {selfComments.map(comment => (
+            {selfComments.map((comment) => (
               <Comment key={comment.id}>
                 <FatText text={comment.user.username} />
                 {comment.text}
@@ -159,7 +173,9 @@ const PostPresenter = ({
             ))}
           </Comments>
         )}
-        <Timestamp>{createdAt && new Date(createdAt).toLocaleDateString("ko-KR")}</Timestamp>
+        <Timestamp>
+          {createdAt && new Date(createdAt).toLocaleDateString("ko-KR")}
+        </Timestamp>
         <Textarea
           placeholder={"Add a comment..."}
           value={newComment.value}
