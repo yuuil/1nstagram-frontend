@@ -162,7 +162,7 @@ const PostPresenter = ({
             ))}
           </Comments>
         )}
-        <Timestamp>{createdAt}</Timestamp>
+        <Timestamp>{createdAt && new Date(createdAt).toLocaleDateString("ko-KR")}</Timestamp>
         <Textarea
           placeholder={"Add a comment..."}
           value={newComment.value}
