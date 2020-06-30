@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
-import FatText from '../../Components/FatText';
-import Loader from '../../Components/Loader';
-import { Helmet } from 'react-helmet';
-import FollowButton from '../../Components/FollowButton';
-import SquarePost from '../../Components/SquarePost';
-import Avatar from '../../Components/Avatar';
+import FatText from "../../Components/FatText";
+import Loader from "../../Components/Loader";
+import { Helmet } from "react-helmet";
+import FollowButton from "../../Components/FollowButton";
+import SquarePost from "../../Components/SquarePost";
+import Avatar from "../../Components/Avatar";
+import Button from "../../Components/Button";
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -59,14 +60,14 @@ const Posts = styled.div`
   grid-auto-rows: 200px;
 `;
 
-const ProfilePresenter = ({loading, data}) => {
-  if(loading === true) {
+const ProfilePresenter = ({ loading, data, logOut }) => {
+  if (loading === true) {
     return (
       <Wrapper>
         <Loader />
       </Wrapper>
-    )
-  } else if(!loading && data && data.seeUser) {
+    );
+  } else if (!loading && data && data.seeUser) {
     const {
       seeUser: {
         id,
@@ -79,8 +80,8 @@ const ProfilePresenter = ({loading, data}) => {
         followingCount,
         followersCount,
         postsCount,
-        posts
-      }
+        posts,
+      },
     } = data;
     return (
       <Wrapper>
@@ -94,7 +95,11 @@ const ProfilePresenter = ({loading, data}) => {
           <HeaderColumn>
             <UsernameRow>
               <Username>{username}</Username>&ensp;
-              {!isSelf && <FollowButton isFollowing={isFollowing} id={id} />}
+              {isSelf ? (
+                <Button onClick={logOut} text={"Log Out"} />
+              ) : (
+                <FollowButton isFollowing={isFollowing} id={id} />
+              )}
             </UsernameRow>
             <Counts>
               <Count>
@@ -112,9 +117,15 @@ const ProfilePresenter = ({loading, data}) => {
           </HeaderColumn>
         </Header>
         <Posts>
-          {posts && posts.map(post => (
-            <SquarePost key={post.id} likeCount={post.likeCount} commentCount={post.commentCount} file={post.files[0]} />
-          ))}
+          {posts &&
+            posts.map((post) => (
+              <SquarePost
+                key={post.id}
+                likeCount={post.likeCount}
+                commentCount={post.commentCount}
+                file={post.files[0]}
+              />
+            ))}
         </Posts>
       </Wrapper>
     );
