@@ -114,9 +114,6 @@ const PostPresenter = ({
   comments,
   selfComments
 }) => {
-  if (!avatar)
-    avatar =
-      "https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png";
   return (
     <Post>
       <Header>
