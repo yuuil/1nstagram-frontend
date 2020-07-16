@@ -6,7 +6,10 @@ import { defaults, resolvers } from "./LocalState";
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
-  uri: "http://localhost:4000",
+  uri:
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:4000"
+      : "https://insta9ram-backend.herokuapp.com/",
 });
 
 const authLink = setContext((_, { headers }) => {
