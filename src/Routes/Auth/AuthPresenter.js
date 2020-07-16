@@ -91,7 +91,7 @@ const Auth = ({
               <title>Confirm Secret | 1nsta9ram</title>
             </Helmet>
             <form onSubmit={onSubmit}>
-              <Input placeholder="Paster your secret" required {...secret} />
+              <Input placeholder="Paste your secret" required {...secret} />
               <Button text={"Confirm"} />
             </form>
           </>
